@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import html2text
 import logging
 from urllib.parse import urlparse
+from bs4.element import Tag
 
 # Configure logging
 logging.basicConfig(
@@ -76,15 +77,15 @@ def url_to_markdown(url: str) -> str:
         return "No article tag found in the HTML content."
 
 
-def remove_unwanted_elements(article_content: BeautifulSoup) -> BeautifulSoup:
+def remove_unwanted_elements(article_content: Tag) -> Tag:
     """
     Removes unwanted elements from the article content.
 
     Args:
-        article_content (BeautifulSoup): The BeautifulSoup object containing the article content.
+        article_content (Tag): The BeautifulSoup object containing the article content.
 
     Returns:
-        BeautifulSoup: The modified BeautifulSoup object with unwanted elements removed.
+        Tag: The modified BeautifulSoup object with unwanted elements removed.
     """
     for tag, selectors in UNWANTED_SELECTORS.items():
         for selector in selectors:
@@ -95,19 +96,17 @@ def remove_unwanted_elements(article_content: BeautifulSoup) -> BeautifulSoup:
     return article_content
 
 
-def remove_last_element(
-    soup: BeautifulSoup, tag: str, attrs: Dict[str, str]
-) -> BeautifulSoup:
+def remove_last_element(soup: Tag, tag: str, attrs: Dict[str, str]) -> Tag:
     """
     Removes the last element of a specific tag and attributes from the soup.
 
     Args:
-        soup (BeautifulSoup): The BeautifulSoup object.
+        soup (Tag): The BeautifulSoup object.
         tag (str): The tag name to remove.
         attrs (Dict[str, str]): The attributes to match.
 
     Returns:
-        BeautifulSoup: The modified BeautifulSoup object with the last specified element removed.
+        Tag: The modified BeautifulSoup object with the last specified element removed.
     """
     elements = soup.find_all(tag, attrs=attrs)
     if elements:
@@ -117,15 +116,15 @@ def remove_last_element(
     return soup
 
 
-def remove_breadcrumbs(soup: BeautifulSoup) -> BeautifulSoup:
+def remove_breadcrumbs(soup: Tag) -> Tag:
     """
     Removes the 'p' tag with id 'breadcrumbs' from the soup.
 
     Args:
-        soup (BeautifulSoup): The BeautifulSoup object.
+        soup (Tag): The BeautifulSoup object.
 
     Returns:
-        BeautifulSoup: The modified BeautifulSoup object with breadcrumbs removed.
+        Tag: The modified BeautifulSoup object with breadcrumbs removed.
     """
     breadcrumbs = soup.find("p", id="breadcrumbs")
     if breadcrumbs:
