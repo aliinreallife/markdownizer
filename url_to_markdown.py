@@ -21,6 +21,8 @@ UNWANTED_SELECTORS = {
         ".satisfaction",
         ".report",
         ".cta-content",
+        ".in-person-consultation-cta",
+        ".call-cta",
     ],
     "button": [".share"],
     "p": [".breadcrumbs", ".views"],
@@ -50,6 +52,11 @@ def url_to_markdown(url: str) -> str:
         return f"An error occurred: {err}"
 
     soup = BeautifulSoup(response.text, "html.parser")
+
+    # Find all <img> tags and remove them
+    for img in soup.find_all("img"):
+        img.decompose()
+
     soup = remove_breadcrumbs(soup)
     article_content = soup.find("article")
 
@@ -138,7 +145,7 @@ def dump_to_file(
     # Ensure the file has a .md extension
     if not filename.endswith(".md"):
         filename += ".md"
-        
+
     with open(os.path.join(full_dir, filename), "w") as f:
         f.write(md_content)
 
