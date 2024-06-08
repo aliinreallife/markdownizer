@@ -139,8 +139,8 @@ def get_url_path(url: str) -> str:
 
 
 # Usage:
-url = "https://visaland.org/business-visa/"
-md_content = url_to_markdown(url)
-# i want to save with the business-visa part
-file_name = get_url_path(url)
-dump_to_file(md_content, f"{file_name}.md")
+# url = "https://visaland.org/how-to-get-canadian-tourist-visas/"
+# md_content = url_to_markdown(url)
+# # i want to save with the business-visa part
+# file_name = get_url_path(url)
+# dump_to_file(md_content, f"{file_name}.md")
