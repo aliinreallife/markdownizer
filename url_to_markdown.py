@@ -134,6 +134,11 @@ def dump_to_file(
     full_dir = os.path.join(base_dir, dir)
     print(full_dir)
     os.makedirs(full_dir, exist_ok=True)  # Ensure the directory exists
+
+    # Ensure the file has a .md extension
+    if not filename.endswith(".md"):
+        filename += ".md"
+        
     with open(os.path.join(full_dir, filename), "w") as f:
         f.write(md_content)
 
@@ -144,9 +149,9 @@ def get_url_path(url: str) -> str:
     return path.strip("/")  # Remove leading and trailing slashes
 
 
-# Usage:
-url = "https://visaland.org/how-to-get-canadian-tourist-visas/"
-md_content = url_to_markdown(url)
-# i want to save with the business-visa part
-file_name = get_url_path(url)
-dump_to_file(md_content=md_content, filename=f"{file_name}.md")
+# # Usage:
+# url = "https://visaland.org/how-to-get-canadian-tourist-visas/"
+# md_content = url_to_markdown(url)
+# # i want to save with the business-visa part
+# file_name = get_url_path(url)
+# dump_to_file(md_content=md_content, filename=f"{file_name}.md")
