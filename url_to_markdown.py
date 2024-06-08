@@ -68,6 +68,7 @@ def url_to_markdown(url: str) -> str:
         )
         html_converter = html2text.HTML2Text()
         html_converter.ignore_links = False
+        html_converter.body_width = 0  # Prevents line wrapping
         markdown_content = html_converter.handle(str(article_content))
         return markdown_content
     else:
@@ -139,15 +140,16 @@ def dump_to_file(
 ) -> None:
     """Dumps markdown content to a file in a specific directory."""
     full_dir = os.path.join(base_dir, dir)
-    print(full_dir)
     os.makedirs(full_dir, exist_ok=True)  # Ensure the directory exists
 
     # Ensure the file has a .md extension
     if not filename.endswith(".md"):
         filename += ".md"
 
-    with open(os.path.join(full_dir, filename), "w") as f:
+    save_path = os.path.join(full_dir, filename)
+    with open(save_path, "w") as f:
         f.write(md_content)
+    logging.info(f"Markdown content saved to {save_path}")
 
 
 def get_url_path(url: str) -> str:
@@ -156,9 +158,8 @@ def get_url_path(url: str) -> str:
     return path.strip("/")  # Remove leading and trailing slashes
 
 
-# # Usage:
-# url = "https://visaland.org/how-to-get-canadian-tourist-visas/"
-# md_content = url_to_markdown(url)
-# # i want to save with the business-visa part
-# file_name = get_url_path(url)
-# dump_to_file(md_content=md_content, filename=f"{file_name}.md")
+# Usage:
+url = "https://visaland.org/australian-tourist-visa"
+md_content = url_to_markdown(url)
+file_name = get_url_path(url)
+dump_to_file(md_content=md_content, filename=f"{file_name}.md")
