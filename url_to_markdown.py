@@ -1,3 +1,4 @@
+import os
 from typing import Dict, Union
 import requests
 from bs4 import BeautifulSoup
@@ -126,9 +127,14 @@ def remove_breadcrumbs(soup: BeautifulSoup) -> BeautifulSoup:
     return soup
 
 
-def dump_to_file(md_content: str, filename: str) -> None:
-    """Dumps markdown content to a file."""
-    with open(filename, "w") as f:
+def dump_to_file(
+    md_content: str, filename: str, dir: str = "", base_dir: str = "output"
+) -> None:
+    """Dumps markdown content to a file in a specific directory."""
+    full_dir = os.path.join(base_dir, dir)
+    print(full_dir)
+    os.makedirs(full_dir, exist_ok=True)  # Ensure the directory exists
+    with open(os.path.join(full_dir, filename), "w") as f:
         f.write(md_content)
 
 
@@ -139,8 +145,8 @@ def get_url_path(url: str) -> str:
 
 
 # Usage:
-# url = "https://visaland.org/how-to-get-canadian-tourist-visas/"
-# md_content = url_to_markdown(url)
-# # i want to save with the business-visa part
-# file_name = get_url_path(url)
-# dump_to_file(md_content, f"{file_name}.md")
+url = "https://visaland.org/how-to-get-canadian-tourist-visas/"
+md_content = url_to_markdown(url)
+# i want to save with the business-visa part
+file_name = get_url_path(url)
+dump_to_file(md_content=md_content, filename=f"{file_name}.md")
