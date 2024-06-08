@@ -146,7 +146,7 @@ def dump_to_file(
         base_dir (str, optional): The base directory to save the file in. Defaults to "output".
     """
 
-    full_dir = os.path.join(base_dir, dir)
+    full_dir = os.path.join(base_dir, directory)
     os.makedirs(full_dir, exist_ok=True)  # Ensure the directory exists
 
     # Ensure the file has a .md extension
