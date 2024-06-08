@@ -50,34 +50,34 @@ def categorize_urls(urls):
     }
 
 
-# Use the functions
-sitemap_url = "https://visaland.org/post-sitemap.xml"
-urls_from_sitemap = extract_urls_from_sitemap(sitemap_url)
-categories, special_categories = categorize_urls(urls_from_sitemap)
+# # Usage
+# sitemap_url = "https://visaland.org/post-sitemap.xml"
+# urls_from_sitemap = extract_urls_from_sitemap(sitemap_url)
+# categories, special_categories = categorize_urls(urls_from_sitemap)
 
-# Print the categorized URLs
-for category, urls in categories.items():
-    print(f"{category} URLs:")
-    for url in urls:
-        print(url)
-    print()
+# # Print the categorized URLs
+# for category, urls in categories.items():
+#     print(f"{category} URLs:")
+#     for url in urls:
+#         print(url)
+#     print()
 
-# Print the uncategorized URLs
-print("Uncategorized URLs:")
-for url in special_categories["uncategorized"]:
-    print(url)
-print()
+# # Print the uncategorized URLs
+# print("Uncategorized URLs:")
+# for url in special_categories["uncategorized"]:
+#     print(url)
+# print()
 
-# Print the URLs in multiple categories
-print("URLs in multiple categories:")
-for url in special_categories["multiple_categories"]:
-    print(url)
-print()
+# # Print the URLs in multiple categories
+# print("URLs in multiple categories:")
+# for url in special_categories["multiple_categories"]:
+#     print(url)
+# print()
 
-print("total:", len(urls_from_sitemap))
-print(
-    "uncategorized:",
-    len(special_categories["uncategorized"]),
-    "| multiple categories:",
-    len(special_categories["multiple_categories"]),
-)
+# print("total:", len(urls_from_sitemap))
+# print(
+#     "uncategorized:",
+#     len(special_categories["uncategorized"]),
+#     "| multiple categories:",
+#     len(special_categories["multiple_categories"]),
+# )
