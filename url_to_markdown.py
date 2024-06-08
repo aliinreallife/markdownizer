@@ -136,9 +136,17 @@ def remove_breadcrumbs(soup: BeautifulSoup) -> BeautifulSoup:
 
 
 def dump_to_file(
-    md_content: str, filename: str, dir: str = "", base_dir: str = "output"
+    md_content: str, filename: str, directory: str = "", base_dir: str = "output"
 ) -> None:
-    """Dumps markdown content to a file in a specific directory."""
+    """Dumps markdown content to a file in a specific directory.
+
+    Args:
+        md_content (str): The markdown content to save.
+        filename (str): The name of the file.
+        directory (str, optional): The directory to save the file in. Defaults to "".
+        base_dir (str, optional): The base directory to save the file in. Defaults to "output".
+    """
+
     full_dir = os.path.join(base_dir, dir)
     os.makedirs(full_dir, exist_ok=True)  # Ensure the directory exists
 
