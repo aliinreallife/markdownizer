@@ -7,7 +7,6 @@ urls_from_sitemap = extract_urls_from_sitemap(sitemap_url)
 categorized_urls, special_categories = categorize_urls(urls_from_sitemap)
 
 for category, urls in categorized_urls.items():
-    print(category)
     for url in urls:
         file_name = get_url_path(url)
         markdown = url_to_markdown(url)
