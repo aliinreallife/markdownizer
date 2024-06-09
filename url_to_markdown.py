@@ -71,6 +71,7 @@ def url_to_markdown(url: str) -> str:
         html_converter.ignore_links = False
         html_converter.body_width = 0  # Prevents line wrapping
         markdown_content = html_converter.handle(str(article_content))
+        markdown_content = markdown_content.replace("\\.", ".")
         return markdown_content
     else:
         logging.warning("No article tag found in the HTML content.")
