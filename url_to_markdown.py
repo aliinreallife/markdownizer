@@ -3,14 +3,12 @@ from typing import Dict, Union
 import requests
 from bs4 import BeautifulSoup
 import html2text
-import logging
+import logger
 from urllib.parse import urlparse
 from bs4.element import Tag
+from logger import logger
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# Configure logger
 
 UNWANTED_SELECTORS = {
     "div": [
@@ -44,12 +42,12 @@ def url_to_markdown(url: str) -> str:
     try:
         response = requests.get(url)
         response.raise_for_status()
-        logging.info("Successfully fetched URL content.")
+        logger.info("Successfully fetched URL content.")
     except requests.HTTPError as http_err:
-        logging.error(f"HTTP error occurred: {http_err}")
+        logger.error(f"HTTP error occurred: {http_err}")
         return f"HTTP error occurred: {http_err}"
     except Exception as err:
-        logging.error(f"An error occurred: {err}")
+        logger.error(f"An error occurred: {err}")
         return f"An error occurred: {err}"
 
     soup = BeautifulSoup(response.text, "html.parser")
@@ -62,7 +60,7 @@ def url_to_markdown(url: str) -> str:
     article_content = soup.find("article")
 
     if article_content:
-        logging.info("Found article content.")
+        logger.info("Found article content.")
         article_content = remove_unwanted_elements(article_content)
         article_content = remove_last_element(
             article_content, "div", {"class": "container px-sm-0"}
@@ -74,7 +72,7 @@ def url_to_markdown(url: str) -> str:
         markdown_content = markdown_content.replace("\\.", ".")
         return markdown_content
     else:
-        logging.warning("No article tag found in the HTML content.")
+        logger.warning("No article tag found in the HTML content.")
         return "No article tag found in the HTML content."
 
 
@@ -92,7 +90,7 @@ def remove_unwanted_elements(article_content: Tag) -> Tag:
         for selector in selectors:
             for element in article_content.select(f"{tag}{selector}"):
                 element.decompose()
-                logging.info(f"Removed unwanted element: {selector}")
+                logger.info(f"Removed unwanted element: {selector}")
 
     return article_content
 
@@ -112,7 +110,7 @@ def remove_last_element(soup: Tag, tag: str, attrs: Dict[str, str]) -> Tag:
     elements = soup.find_all(tag, attrs=attrs)
     if elements:
         elements[-1].decompose()
-        logging.info(f"Removed the last {tag} element with attributes {attrs}")
+        logger.info(f"Removed the last {tag} element with attributes {attrs}")
 
     return soup
 
@@ -130,7 +128,7 @@ def remove_breadcrumbs(soup: Tag) -> Tag:
     breadcrumbs = soup.find("p", id="breadcrumbs")
     if breadcrumbs:
         breadcrumbs.decompose()
-        logging.info("Removed breadcrumbs.")
+        logger.info("Removed breadcrumbs.")
 
     return soup
 
@@ -160,7 +158,7 @@ def dump_to_file(
     save_path = os.path.join(full_dir, filename)
     with open(save_path, "w") as f:
         f.write(md_content)
-    logging.info(f"Markdown content saved to {save_path}")
+    logger.info(f"Markdown content saved to {save_path}")
 
 
 def get_url_path(url: str) -> str:
