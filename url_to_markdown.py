@@ -136,7 +136,10 @@ def remove_breadcrumbs(soup: Tag) -> Tag:
 
 
 def dump_to_file(
-    md_content: str, filename: str, directory: str = "", base_dir: str = "output"
+    md_content: str,
+    filename: str = "output.md",
+    directory: str = "",
+    base_dir: str = "output",
 ) -> None:
     """Dumps markdown content to a file in a specific directory.
 
