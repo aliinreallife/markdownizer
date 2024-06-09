@@ -1,6 +1,6 @@
-![download](https://github.com/aliinreallife/markdownizer/assets/91134550/31be974e-75f0-422f-97e7-d826d76def3d)
+![download](https://github.com/aliinreallife/markdownizer/assets/91134550/ddaca4d0-fd68-4b8a-b137-5a81e4ea32ad)
 
-`Markdownizer` is a tool designed to convert your website’s content into Markdown files effortlessly. It parses your website’s sitemap and generates structured Markdown files for each blog post, allowing you to easily manage, edit, and share your content.
+`Markdownizer` is a tool designed to convert website’s content into Markdown files effortlessly. It parses your website’s sitemap and generates structured Markdown files for each blog post, allowing you to easily manage, edit, and share your content.
 
 ## Current Support
 
