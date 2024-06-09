@@ -12,4 +12,4 @@ for category, urls in categorized_urls.items():
         file_name = get_url_path(url)
         markdown = url_to_markdown(url)
 
-        dump_to_file(md_content=markdown, filename=file_name, dir=category)
+        dump_to_file(md_content=markdown, filename=file_name, directory=category)
