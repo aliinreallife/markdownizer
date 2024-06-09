@@ -166,8 +166,8 @@ def get_url_path(url: str) -> str:
     return path.strip("/")  # Remove leading and trailing slashes
 
 
-# Usage:
-url = "https://visaland.org/australian-tourist-visa"
-md_content = url_to_markdown(url)
-file_name = get_url_path(url)
-dump_to_file(md_content=md_content, filename=f"{file_name}.md")
+# # Usage:
+# url = "https://visaland.org/australian-tourist-visa"
+# md_content = url_to_markdown(url)
+# file_name = get_url_path(url)
+# dump_to_file(md_content=md_content, filename=f"{file_name}.md")
